@@ -15,8 +15,8 @@ export default function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        try{
-            const userCredential =await signInWithEmailAndPassword(auth, email, password);
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
             await userCredential.user.reload();
             const freshUser = auth.currentUser;
 

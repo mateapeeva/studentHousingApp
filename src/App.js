@@ -10,6 +10,7 @@ import StudentPage from './StudentPage';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase.js';
 
+
 function Landing(){
 
   useEffect(() => {
