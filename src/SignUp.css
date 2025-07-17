@@ -89,3 +89,20 @@ input{
   color: darkgreen;
 }
 
+.role-selection{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.role-selection label{
+  width: 200px;
+}
+
+.role-selection label.selected{
+  background-color: rgb(44, 98, 51);
+  color: white;
+  border-radius: 5px;
+}
+
+

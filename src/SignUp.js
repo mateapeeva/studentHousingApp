@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import { auth, db } from "./firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
 import { doc, QueryEndAtConstraint, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import './SignUp.css';
 
 export default function SignUp() {
@@ -10,12 +11,14 @@ export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [role, setRole] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(!name || !surname || !email || !password || !confirmPassword) {
+        if(!name || !surname || !email || !password || !confirmPassword || !role) {
             setError("All fields are required.");
             return;
         }
@@ -26,18 +29,26 @@ export default function SignUp() {
         }
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            await sendEmailVerification(userCredential.user);
 
-            await setDoc(doc(db, "users", userCredential.user.uid), {
-                name,
-                surname,
-                email
-            });
-            // Create a user document in Firestore
+            localStorage.setItem(
+                "pendingUserData",
+                JSON.stringify({ name, surname, email, role })
+            );
+        
 
             setError("");
-            alert("User created successfully!");
-        } catch (error) {
-            setError(error.message);
+            alert("Verification email sent! Please verify your email before logging in.");
+            await signOut(auth);
+
+            navigate("/login");
+        } 
+        catch (error) {
+            if (error.code === "auth/email-already-in-use") {
+                setError("This email is already registered. Please use another email or log in.");
+            } else {
+                setError(error.message);
+        }
         }
     };
 
@@ -45,6 +56,28 @@ export default function SignUp() {
         <div>
             <form onSubmit={handleSubmit}>
                 <h1>Sign Up</h1>
+                <div className="role-selection">
+                    <label className = {role === "Student" ? "selected" : ""}>
+                        <input
+                            type="radio"
+                            placeholder="Student"
+                            value= "Student"
+                            checked={role === "Student"}
+                            onChange={(e) => setRole(e.target.value)}
+                        />
+                        Student
+                    </label>
+                    <label className = {role === "Landlord" ? "selected" : ""}>
+                        <input
+                            type="radio"
+                            placeholder="Landlord"
+                            value= "Landlord"
+                            checked={role === "Landlord"}
+                            onChange={(e) => setRole(e.target.value)}
+                        />
+                        Landlord
+                    </label>
+                </div>
                 <input
                     type="text"
                     placeholder="First Name"
