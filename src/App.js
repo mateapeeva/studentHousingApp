@@ -1,13 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
 import app from './firebase';
-import React, { use } from 'react';
+import React, { use, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import SignUp from './SignUp';
 import Login from './Login';
+import LandlordPage from './LandlordPage';
+import StudentPage from './StudentPage';
+import { signOut } from 'firebase/auth';
+import { auth } from './firebase.js';
 
 function Landing(){
+
+  useEffect(() => {
+    signOut(auth);
+  },[]);
+
   const navigate = useNavigate();
 
   return(
@@ -42,6 +50,7 @@ function Landing(){
   );
 }
 
+
 function App() {
   return (
     <Router>
@@ -49,6 +58,8 @@ function App() {
         <Route path = "/" element={<Landing />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/landlord" element={<LandlordPage />} />
+        <Route path="/student" element={<StudentPage />} />
       </Routes>
     </Router>
   

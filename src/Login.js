@@ -3,19 +3,24 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db} from './firebase.js'
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [userData, setUserData] = useState(null);
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try{
             const userCredential =await signInWithEmailAndPassword(auth, email, password);
+            await userCredential.user.reload();
+            const freshUser = auth.currentUser;
 
-             if (!userCredential.user.emailVerified) {
+             if (!freshUser.emailVerified) {
                 alert("Please verify your email before logging in.");
                 await signOut(auth);
                 return;
@@ -23,6 +28,13 @@ export default function Login() {
 
             setError("");
             alert("Login successful!");
+            const userRef = doc(db,"users", freshUser.uid);
+            const userSnap = await getDoc(userRef);
+            if(userSnap.exists() && userSnap.data().role === "Landlord"){
+                navigate("/landlord");
+            }else if(userSnap.exists() && userSnap.data().role === "Student"){
+                navigate("/student");
+            }
         } catch (error){
             setError(error.message);
         }
