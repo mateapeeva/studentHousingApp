@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, db} from './firebase.js'
+import { auth, db} from '../firebase.js'
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -31,7 +31,7 @@ export default function Login() {
             const userRef = doc(db,"users", freshUser.uid);
             const userSnap = await getDoc(userRef);
             if(userSnap.exists() && userSnap.data().role === "Landlord"){
-                navigate("/landlord");
+                navigate("/dashboard");
             }else if(userSnap.exists() && userSnap.data().role === "Student"){
                 navigate("/student");
             }

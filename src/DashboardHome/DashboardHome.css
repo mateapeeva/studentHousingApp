@@ -1,0 +1,48 @@
+
+
+#cards {
+    margin: 20px;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.card {
+    width: 350px;
+    height: 150px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: rgb(44, 98, 51);
+    color: white;
+    padding: 10px;
+}
+
+#buttons {
+    margin: 20px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.btn {
+    background-color: rgb(44, 98, 51);
+    color: whitesmoke;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.btn:hover {
+    background-color: rgb(212, 237, 213);
+    color: darkgreen;
+}
+

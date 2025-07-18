@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { auth, db } from "./firebase";
+import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
 import { doc, QueryEndAtConstraint, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";

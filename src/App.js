@@ -3,13 +3,15 @@ import app from './firebase';
 import React, { use, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import SignUp from './SignUp';
-import Login from './Login';
-import LandlordPage from './LandlordPage';
+import SignUp from './Signup/SignUp.js';
+import Login from './Login/Login';
 import StudentPage from './StudentPage';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase.js';
-
+import DashboardHome from './DashboardHome/DashboardHome.js';
+import DashboardLayout from './DashboardLayout';
+import AddListing from './AddListing/AddListing.js';
+import MyListings from './MyListings/MyListings.js';
 
 function Landing(){
 
@@ -59,8 +61,13 @@ function App() {
         <Route path = "/" element={<Landing />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/landlord" element={<LandlordPage />} />
         <Route path="/student" element={<StudentPage />} />
+
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<DashboardHome />} />
+          <Route path="/dashboard/my-listings" element={<MyListings />} />
+          <Route path="/dashboard/add-listing" element={<AddListing />} />
+        </Route>
       </Routes>
     </Router>
   
