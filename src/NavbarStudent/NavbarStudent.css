@@ -1,0 +1,62 @@
+
+.navbar {
+    margin: 0px;
+    height: 100%;
+    position: fixed;
+    background: rgb(44, 98, 51);
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.navbar h2 {
+    color: white;
+    padding: 20px 5px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid white;
+    align-self: center;
+}
+
+.btnNav {
+    background-color: rgb(44, 98, 51);
+    color: white;
+    padding: 15px 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-align: start;
+    text-decoration: none;
+    align-items: center;
+    font-family: inherit;
+}
+
+.btnNavHeader{
+    background-color: rgb(44, 98, 51);
+    color: white;
+    padding: 15px 10px;
+    margin: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    align-items: center;
+    font-family: inherit;
+    text-decoration: none;
+}
+
+.btnNav:hover {
+    background-color: rgb(212, 237, 213);
+    color: darkgreen;
+}
+
+.btnNavHeader:hover {
+    text-decoration: underline;
+}
+
+footer{
+    width: 100%;
+    text-align: center;
+    margin-top: 100%;
+}

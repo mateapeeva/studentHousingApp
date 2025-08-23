@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import { db } from "./firebase";
+import { db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import './Navbar.css';
+import './NavbarStudent.css';
 
-export default function Navbar() {
+export default function NavbarStudent() {
     const [userData, setUserData] = useState({ name: '' });
     const handleLogout = async () => {
         await signOut(auth);
@@ -31,12 +31,12 @@ export default function Navbar() {
 
     return (
         <nav className="navbar">
-            <Link to="/dashboard" className="btnNavHeader">{userData.name}'s Dashboard</Link>
-            <Link to="/dashboard/my-listings" className="btnNav">My Listings</Link>
-            <Link to="/dashboard/add-listing" className="btnNav">Add Listing</Link>
-            <Link to="/settings" className="btnNav">Settings</Link>
+            <Link to="/student-dashboard" className="btnNavHeader">{userData.name}'s Dashboard</Link>
+            <Link to="/student-dashboard/find-housing" className="btnNav">Find Housing</Link>
+            <Link to="/student-dashboard/my-applications" className="btnNav">My Applications</Link>
+            <Link to="/student-dashboard/find-roommates" className="btnNav">Find Roommates</Link>
+            <Link to="/student-dashboard/contact" className="btnNav">Contact Us</Link>
             <button className="btnNav" onClick={handleLogout}>Log Out</button>
-            <Link to="/contact" className="btnNav">Contact Us</Link>
             <footer>
                 <p>&copy; 2025 Student Housing App</p>
             </footer>

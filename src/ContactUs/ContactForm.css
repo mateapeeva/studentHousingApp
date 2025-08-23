@@ -1,0 +1,35 @@
+.contact-form label{
+    display: block;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+}
+
+.contact-form label textarea{
+    display: block;
+    width: 800px;
+    height: 500px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    margin: 20px;
+}
+
+.btnContact {
+    background-color: rgb(44, 98, 51);
+    color: whitesmoke;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.btnContact:hover {
+    background-color: rgb(212, 237, 213);
+    color: darkgreen;
+}

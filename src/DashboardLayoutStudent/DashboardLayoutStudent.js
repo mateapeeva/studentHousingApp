@@ -1,12 +1,12 @@
-import Navbar from './NavbarLandlord/Navbar';
+import NavbarStudent from '../NavbarStudent/NavbarStudent';
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { auth, db } from './firebase';
+import { auth, db } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import './DashboardLayout.css';
+import './DashboardLayoutStudent.css';
 
-export default function DashboardLayout() {
+export default function DashboardLayoutStudent() {
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export default function DashboardLayout() {
     return(
         <div className="dashboard-layout">
             <div className="navbar-layout">
-                <Navbar />
+                <NavbarStudent />
             </div>
             <main className='dashboard-content-layout'>
                 <Outlet context={{ user: userData }} />

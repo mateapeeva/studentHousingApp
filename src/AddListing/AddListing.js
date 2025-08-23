@@ -1,55 +1,74 @@
+
 import React, { useState } from "react";
-import { db, storage } from "../firebase";
+import { db } from "../firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import axios from "axios";
 import './AddListing.css';
 
 export default function AddListing() {
+    // Remove selected image
+    const handleRemoveImage = () => {
+        setForm(prev => ({ ...prev, image: null }));
+        setImagePreview("");
+    };
+    // Helper for file input label
+    const getFileInputLabel = () => {
+        if (!form.image) return 'No file selected.';
+        return '1 file selected.';
+    };
     const [form, setForm] = useState({
         address: "",
         price: "",
         numberOfRooms: "",
         apartmentSize: "",
-        description: "",
-        // images: [],
+        descriptionAmenities: "",
+        image: null,
     });
     const [loading, setLoading] = useState(false);
-    // const [imagePreviews, setImagePreviews] = useState([]);
+    const [imagePreview, setImagePreview] = useState("");
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    // const handleFileChange = (e) => {
-    //     const files = Array.from(e.target.files);
-    //     setForm({ ...form, images: files });
-    //     setImagePreviews(files.map((file) => URL.createObjectURL(file)));
-    // };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setForm({ ...form, image: file });
+        setImagePreview(file ? URL.createObjectURL(file) : "");
+    };
+
+    const CLOUD_NAME = "dd6ryjwgu"; 
+    const UPLOAD_PRESET = "Student Housing App"; 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         try {
-            // const imageUrls = [];
-            // for (const file of form.images) {
-            //     const storageRef = ref(storage, `listings/${Date.now()}-${file.name}`);
-            //     await uploadBytes(storageRef, file);
-            //     const url = await getDownloadURL(storageRef);
-            //     imageUrls.push(url);
-            // }
+            let imageUrl = "";
+            if (form.image) {
+                const data = new FormData();
+                data.append("file", form.image);
+                data.append("upload_preset", UPLOAD_PRESET);
+                const res = await axios.post(
+                    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+                    data
+                );
+                imageUrl = res.data.secure_url;
+            }
             await addDoc(collection(db, "listings"), {
                 address: form.address,
                 price: Number(form.price),
                 numberOfRooms: Number(form.numberOfRooms),
                 apartmentSize: Number(form.apartmentSize),
                 descriptionAmenities: form.descriptionAmenities,
-                // images: imageUrls,
+                imageUrl: imageUrl,
                 createdAt: Timestamp.now(),
             });
             alert("Listing added!");
-            setForm({ address: "", price: "", numberOfRooms: "", apartmentSize: "", descriptionAmenities: "", images: [] });
-            // setImagePreviews([]);
+            setForm({ address: "", price: "", numberOfRooms: "", apartmentSize: "", descriptionAmenities: "", image: null });
+            setImagePreview("");
         } catch (error) {
             alert("Error adding listing: " + error.message);
         } finally {
@@ -108,23 +127,33 @@ export default function AddListing() {
                         required
                     />
                 </label>
-                {/* <label>
-                    Images:
+                <label style={{ display: 'block', marginBottom: 8 }}>
+                    Add Images:
                     <input
                         type="file"
-                        name="images"
-                        multiple
+                        name="image"
                         accept="image/*"
                         onChange={handleFileChange}
+                        style={{ marginRight: 8 }}
                     />
+                    <span
+                        style={{
+                            fontStyle: 'italic',
+                            color: '#555',
+                            display: 'block',
+                            textAlign: 'center',
+                            marginTop: 4
+                        }}
+                    >
+                        {getFileInputLabel()}
+                    </span>
                 </label>
-                {imagePreviews.length > 0 && (
-                    <div className="image-previews">
-                        {imagePreviews.map((src, idx) => (
-                            <img src={src} alt="preview" key={idx} style={{ height: 80, marginRight: 8 }} />
-                        ))}
+                {imagePreview && (
+                    <div className="image-previews" style={{ display: 'inline-block', position: 'relative', marginRight: 8 }}>
+                        <img src={imagePreview} alt="preview" style={{ height: 80 }} />
+                        <button type="button" onClick={handleRemoveImage} style={{ position: 'absolute', top: 0, right: 0 }}>x</button>
                     </div>
-                )} */}
+                )}
                 <button type="submit" disabled={loading} className="btnAddListing">
                     {loading ? "Saving..." : "Create Listing"}
                 </button>

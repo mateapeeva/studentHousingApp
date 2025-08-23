@@ -1,11 +1,11 @@
 import React, { use, useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import './MyListings.css';
+import './FindHousing.css';
 import { Link } from "react-router-dom";
 
 
-function MyListings() {
+function FindHousing() {
     const [listings, setListings] = useState([]);
     const [carouselIndexes, setCarouselIndexes] = useState({});
 
@@ -68,7 +68,6 @@ function MyListings() {
                             <p className="listing-description"><b>Description:</b> {listing.descriptionAmenities}</p>
                             <p className="listing-description"><b>Price:</b> €{listing.price}</p>
                             <p className="listing-description"><b>Location:</b> {listing.address}</p>
-                            <Link to={`/dashboard/edit-listing/${listing.id}`} className="edit-listing-btn">Edit</Link>
                         </div>
                     );
                 })}
@@ -77,4 +76,4 @@ function MyListings() {
     );
 }
 
-export default MyListings;
+export default FindHousing;

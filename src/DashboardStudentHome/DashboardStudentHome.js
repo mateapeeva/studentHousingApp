@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import './DashboardHome.css';
+import './DashboardStudentHome.css';
 
 
 
 
-export default function DashboardHome() {
+export default function DashboardStudentHome() {
     const [loading, setLoading] = useState(true);
     const [allowed, setAllowed] = useState(false);
     const [userData, setUserData] = useState(null);
@@ -28,7 +28,7 @@ export default function DashboardHome() {
             }
             const userRef = doc(db, "users", user.uid);
             const userSnap = await getDoc(userRef);
-            if (userSnap.exists() && userSnap.data().role === "Landlord") {
+            if (userSnap.exists() && userSnap.data().role === "Student") {
                 setAllowed(true);
                 setUserData(userSnap.data());
             } else {
@@ -50,20 +50,20 @@ export default function DashboardHome() {
         <div className="content">
             <div className="text">
                 <h1>Welcome, {userData.name}!</h1>
-                <p>You are logged in as a Landlord</p>
+                <p>You are logged in as a Student</p>
             </div>
             <div className="cardsDashboard">
                 <div className="cardDashboard">
-                    <h2>My Listings</h2>
-                    <p>See how your property listings look and edit them</p>
+                    <h2>Find Housing</h2>
+                    <p>Browse through available housing options</p>
                 </div>
                 <div className="cardDashboard">
-                    <h2>Add Listing</h2>
-                    <p>Create a new property listing here</p>
+                    <h2>My Applications</h2>
+                    <p>View and manage your pending applications for housing here</p>
                 </div>
                 <div className="cardDashboard">
-                    <h2>View Applicants</h2>
-                    <p>See all applicants for your listings</p>
+                    <h2>Find Roommates</h2>
+                    <p>Connect with other students looking for roommates</p>
                 </div>
                 <div className="cardDashboard">
                     <h2>Contact Us</h2>

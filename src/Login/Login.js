@@ -33,7 +33,7 @@ export default function Login() {
             if(userSnap.exists() && userSnap.data().role === "Landlord"){
                 navigate("/dashboard");
             }else if(userSnap.exists() && userSnap.data().role === "Student"){
-                navigate("/student");
+                navigate("/student-dashboard");
             }
         } catch (error){
             setError(error.message);
