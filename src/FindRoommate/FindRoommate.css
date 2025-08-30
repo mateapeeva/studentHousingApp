@@ -1,8 +1,10 @@
 
 .btnRoommate {
-    background-color: rgb(44, 98, 51);
+    margin-top: auto;
+    align-self: flex-end;
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
     color: whitesmoke;
-    padding: 10px 20px;
+    padding: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -10,8 +12,13 @@
     height: 40px;
     font-weight: bold;
     font-size: 1.1rem;
-    margin-top: 10px;
-    align-self: flex-end;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btnRoommate:hover{
+    background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+    transform: scale(1.1);
 }
 
 .roommates{
@@ -39,6 +46,38 @@
     gap:10px;
 }
 
-.roommates label{
+.studentCard {
+    border-radius: 20px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    margin:20px;
+    text-align: left;
+    width: 300px;
+    height: 180px;
     font-size: 1rem;
+    background:whitesmoke;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.studentCard:hover{
+    transform: scale(1.02);
+    background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
+}
+
+.infoRoommate {
+    display: flex;
+    align-items: center;
+    margin: 8px;
+    align-self: center;
+}
+
+.infoRoommate{
+    margin-right: 8px;
+}
+
+.iconRoommate {
+    margin-right: 5px;
 }

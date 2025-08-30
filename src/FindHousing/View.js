@@ -5,6 +5,12 @@ import { db } from "../firebase";
 import './View.css';
 import { collection, addDoc } from "firebase/firestore";
 import { auth } from "../firebase";
+import Map, { Marker } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import { useCallback } from 'react';
+
+
+const MAPTILER_KEY = "kWS7KZmpJRLeVMdBOMaI";
 
 
 function View() {
@@ -13,6 +19,8 @@ function View() {
     const [listing, setListing] = useState(null);
     const [currentImgIdx, setCurrentImgIdx] = useState(0);
     const [landlord, setLandlord] = useState(null);
+
+
 
     useEffect(() => {
         const fetchListing = async () => {
@@ -26,6 +34,14 @@ function View() {
         };
         fetchListing();
     }, [id]);
+
+    const [coords, setCoords] = useState(null);
+
+    useEffect(() => {
+        if (listing && listing.coordinates) {
+            setCoords(listing.coordinates);
+        }
+    }, [listing]);
 
     useEffect(() => {
         const fetchLandlord = async () => {
@@ -52,6 +68,10 @@ function View() {
     const handleNext = () => {
         setCurrentImgIdx((prev) => (prev === images.length - 1 ? 0 : prev + 1));
     };
+
+
+
+
 
     return (
         <div className="containerView">
@@ -89,10 +109,32 @@ function View() {
                         <p><b>Landlord:</b> {landlord.name} {landlord.surname}</p>
                     )}
                 </div>
-                <div className="apply">
-                    <p><b>You love the appartment? Apply and connect with {landlord ? landlord.name : "the landlord"}!</b></p>
-                    <button className="btnApply">Apply</button>
-                </div>
+                {coords && (
+                    <div className="map-container-view">
+                        <Map
+                            mapStyle="https://api.maptiler.com/maps/streets/style.json?key=kWS7KZmpJRLeVMdBOMaI"
+                            style={{ width: '100%', height: '100%' }}
+                            onLoad={() => console.log('Map loaded successfully')}
+                            onError={(error) => console.error('Map error:', error)}
+                            initialViewState={{
+                                longitude: coords.lng,
+                                latitude: coords.lat,
+                                zoom: 15
+                            }}
+                        >
+                            <Marker
+                                longitude={coords.lng}
+                                latitude={coords.lat}
+                                color="red"
+                            />
+                        </Map>
+                    </div>
+
+                )}
+
+
+
+                <button className="btnApply">Apply</button>
             </div>
         </div>
     );

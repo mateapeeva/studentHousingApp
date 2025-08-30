@@ -4,6 +4,10 @@ import { db } from '../firebase';
 import { useParams } from "react-router-dom";
 import './FindRoommate.css';
 import { auth } from "../firebase";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import {faPhone, faGraduationCap} from '@fortawesome/free-solid-svg-icons';
+
 
 const FindRoommate = () => {
     const [students, setStudents] = useState([]);
@@ -65,7 +69,7 @@ const FindRoommate = () => {
         surname: "",
         phone: "",
         instagram: "",
-        municipality: "",
+        faculty: "",
     });
     const [roommateSuccess, setRoommateSuccess] = useState(false);
     const [roommateError, setRoommateError] = useState("");
@@ -105,25 +109,19 @@ const FindRoommate = () => {
             >
                 Edit Profile
             </button>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', margin: '12px' }}>
+            <div>
                 {students.map(student => (
                     <div
                         key={student.id}
-                        style={{
-                            border: '1px solid #ccc',
-                            borderRadius: '8px',
-                            padding: '16px',
-                            width: '270px',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-                        }}
+                        className='studentCard'
                     >
-                        <h3>{student.name} {student.surname}</h3>
+                        <h3 style={{ textAlign: 'center' }}>{student.name} {student.surname}</h3>
                         {student.profile && (
                             <img src={student.profile} alt="Profile" style={{ width: '100%', borderRadius: '8px', marginBottom: 8 }} />
                         )}
-                        <p><b>Phone:</b> {student.phone}</p>
-                        <p><b>Instagram:</b> {student.instagram}</p>
-                        <p><b>Municipality:</b> {student.municipality}</p>
+                        <p className='infoRoommate'><span><FontAwesomeIcon icon={faPhone} className="iconRoommate" /></span> {student.phone}</p>
+                        <p className='infoRoommate'><span><FontAwesomeIcon icon={faInstagram} className="iconRoommate" /></span> {student.instagram}</p>
+                        <p className='infoRoommate'><span><FontAwesomeIcon icon={faGraduationCap} className="iconRoommate" /></span> {student.municipality}</p>
                         {student.appliedApartments && student.appliedApartments.length > 0 && (
                             <p style={{ fontSize: '0.95em', color: '#555' }}><b>Applied Apartments:</b> {student.appliedApartments.join(', ')}</p>
                         )}
@@ -145,19 +143,8 @@ const FindRoommate = () => {
                 }}>
                     <div style={{ background: '#fff', padding: 32, borderRadius: 12, minWidth: 200, textAlign: 'center', boxShadow: '0 2px 16px rgba(0,0,0,0.2)' }}>
                         <form className="roommates" onSubmit={handleRoommateSubmit}>
-                            <h3>You don't have any roommates yet? Do not worry, you can find one here!</h3>
                             <label>
-                                <b>Municipality</b>
-                                <input
-                                    type="text"
-                                    name="roommateMunicipality"
-                                    value={roommateForm.municipality}
-                                    onChange={e => setRoommateForm({ ...roommateForm, municipality: e.target.value })}
-                                    required
-                                />
-                            </label>
-                            <label>
-                                <b>Phone Number:</b>
+                                <span><FontAwesomeIcon icon={faPhone} className="iconRoommate" />Phone Number</span>
                                 <input
                                     type="text"
                                     name="phoneNumber"
@@ -167,7 +154,7 @@ const FindRoommate = () => {
                                 />
                             </label>
                             <label>
-                                <b>Instagram:</b>
+                                <span><FontAwesomeIcon icon={faInstagram} className="iconRoommate" />Instagram</span>
                                 <input
                                     type="text"
                                     name="instagram"
@@ -176,7 +163,17 @@ const FindRoommate = () => {
                                     required
                                 />
                             </label>
-                            <button className="btnRoommate">Save your info</button>
+                            <label>
+                                <span><FontAwesomeIcon icon={faGraduationCap} className="iconRoommate" />Faculty</span>
+                                <input
+                                    type="text"
+                                    name="roommateFaculty"
+                                    value={roommateForm.faculty}
+                                    onChange={e => setRoommateForm({ ...roommateForm, faculty: e.target.value })}
+                                    required
+                                />
+                            </label>
+                            <button className="btnRoommate" style={{ marginTop: '12px', marginBottom: '-10px' }}>Save your info</button>
                         </form>
                     </div>
                 </div>
