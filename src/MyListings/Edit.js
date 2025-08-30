@@ -21,11 +21,11 @@ function Edit() {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    // Handle new file selection
+    // Handle new file selection (append, don't replace)
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
-        setNewImages(files);
-        setImagePreviews(files.map(file => URL.createObjectURL(file)));
+        setNewImages(prev => [...prev, ...files]);
+        setImagePreviews(prev => [...prev, ...files.map(file => URL.createObjectURL(file))]);
     };
 
     // Remove existing image
@@ -106,16 +106,30 @@ function Edit() {
         fetchListing();
     }, [id]);
 
+    // Combine existing and new image previews for the carousel
+    const allImages = [...images, ...imagePreviews];
     const handlePrev = () => {
-        setCurrentImgIdx((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+        setCurrentImgIdx((prev) => (prev === 0 ? allImages.length - 1 : prev - 1));
     };
     const handleNext = () => {
-        setCurrentImgIdx((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+        setCurrentImgIdx((prev) => (prev === allImages.length - 1 ? 0 : prev + 1));
+    };
+
+    // Remove image at current index (from either images or imagePreviews)
+    const handleRemoveAt = (idx) => {
+        if (idx < images.length) {
+            setImages(prev => prev.filter((_, i) => i !== idx));
+        } else {
+            const newIdx = idx - images.length;
+            setNewImages(prev => prev.filter((_, i) => i !== newIdx));
+            setImagePreviews(prev => prev.filter((_, i) => i !== newIdx));
+        }
+        setCurrentImgIdx(i => (i > 0 ? i - 1 : 0));
     };
 
     return (
-        <div className="add-listing-page container-edit">
-            <form className="listing-form" onSubmit={handleSubmit}>
+        <div className="container-edit">
+            <form className="edit-form" onSubmit={handleSubmit}>
                 <label>
                     Apartment Size(m²):
                     <input
@@ -165,44 +179,35 @@ function Edit() {
                         onChange={handleFileChange}
                         style={{ marginRight: 8 }}
                     />
-                    <span style={{ fontStyle: 'italic', color: '#555' }}>{getFileInputLabel()}</span>
                 </label>
-                {imagePreviews.length > 0 && (
-                    <div className="image-previews">
-                        {imagePreviews.map((src, idx) => (
-                            <div key={idx} style={{ display: 'inline-block', position: 'relative', marginRight: 8 }}>
-                                <img src={src} alt={`preview-${idx}`} style={{ height: 80 }} />
-                                <button type="button" onClick={() => {
-                                    setNewImages(prev => prev.filter((_, i) => i !== idx));
-                                    setImagePreviews(prev => prev.filter((_, i) => i !== idx));
-                                }} style={{ position: 'absolute', top: 0, right: 0 }}>x</button>
-                            </div>
-
-                        ))}
-                    </div>
-                )}
-                <button className="btnAddListing" type="submit" disabled={loading}>
+                {/* Removed separate imagePreviews rendering; unified carousel below handles all images */}
+                <button className="btnEditSave" type="submit" disabled={loading}>
                     {loading ? "Saving..." : "Save"}
                 </button>
             </form>
-            <div className="cards">
-                {images.length > 0 && (
-                    <div className="image-previews">
-                        <div style={{ position: 'relative', display: 'inline-block' }}>
+            <div className="edit-image-container">
+                {allImages.length > 0 && (
+                    <div className="edit-image-previews">
+                        <div className="edit-image-wrapper">
                             <img
-                                className="listing-image-edit"
-                                src={images[currentImgIdx]}
+                                src={allImages[currentImgIdx]}
                                 alt={`Listing ${currentImgIdx + 1}`}
                             />
-                            <button className="btnRemoveImage" type="button" onClick={() => handleRemoveExisting(currentImgIdx)} style={{ position: 'absolute', top: 0, right: 0 }}>x</button>
+                            <button
+                                className="btnRemoveImage"
+                                type="button"
+                                onClick={() => handleRemoveAt(currentImgIdx)}
+                            >
+                                ×
+                            </button>
                         </div>
-                        {images.length > 1 && (
-                            <div style={{ display: "flex", justifyContent: "center", marginTop: 8 }}>
-                                <button className="btnNextBefore" type="button" onClick={handlePrev} style={{ marginRight: 10 }}>
+                        {allImages.length > 1 && (
+                            <div className="edit-carousel-controls">
+                                <button className="btnNextBeforeEdit" type="button" onClick={handlePrev}>
                                     &lt;
                                 </button>
-                                <span style={{ alignSelf: "center" }}>{currentImgIdx + 1} / {images.length}</span>
-                                <button className="btnNextBefore" type="button" onClick={handleNext} style={{ marginLeft: 10 }}>
+                                <span>{currentImgIdx + 1} / {allImages.length}</span>
+                                <button className="btnNextBeforeEdit" type="button" onClick={handleNext}>
                                     &gt;
                                 </button>
                             </div>

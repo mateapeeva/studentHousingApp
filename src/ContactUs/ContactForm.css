@@ -7,8 +7,8 @@
 
 .contact-form label textarea{
     display: block;
-    width: 800px;
-    height: 500px;
+    width: 40vw;
+    height: 70vh;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -17,7 +17,7 @@
 }
 
 .btnContact {
-    background-color: rgb(44, 98, 51);
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
     color: whitesmoke;
     padding: 10px 20px;
     border: none;
@@ -30,6 +30,49 @@
 }
 
 .btnContact:hover {
-    background-color: rgb(212, 237, 213);
-    color: darkgreen;
+    background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+    transform: scale(1.05);
+}
+
+.contact-form{
+    margin: 5px;
+}
+
+.contact-form-container{
+    padding: 20px;
+    padding-right: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+}
+
+.infoText {
+    margin-right: 40px;
+    font-size: 1.2rem;
+    color: #333;
+    background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
+    align-self: center;
+    height: 30vh;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 20px;
+}
+
+.infoText:hover{
+    background: linear-gradient(90deg, #d5eed5 0%, #f1f6f2 100%);
+}
+
+.iconContainer {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    font-size: 3rem;
+    color: #2c6233;
+    justify-content: center;
+}
+
+.icon:hover{
+    transform: scale(1.2);
+    cursor: pointer;
 }

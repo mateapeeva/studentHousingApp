@@ -3,6 +3,8 @@ import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import './MyListings.css';
 import { Link } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase";
 
 
 function MyListings() {
@@ -10,15 +12,19 @@ function MyListings() {
     const [carouselIndexes, setCarouselIndexes] = useState({});
 
     useEffect(() => {
-        const fetchListings = async () => {
-            const querySnapshot = await getDocs(collection(db, "listings"));
-            const listingsArr = querySnapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-            setListings(listingsArr);
-        };
-        fetchListings();
+        let unsubscribe;
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const querySnapshot = await getDocs(collection(db, "listings"));
+                const listingsArr = querySnapshot.docs
+                    .map(doc => ({ id: doc.id, ...doc.data() }))
+                    .filter(listing => listing.landlordId === user.uid);
+                setListings(listingsArr);
+            } else {
+                setListings([]);
+            }
+        });
+        return () => unsubscribe && unsubscribe();
     }, []);
 
     const handlePrev = (listingId, imagesLength) => {
@@ -37,23 +43,23 @@ function MyListings() {
 
     return (
         <div>
-            <div id="listing-container">
+            <div id="listingContainer">
                 {listings.map(listing => {
                     const images = Array.isArray(listing.imageUrls) && listing.imageUrls.length > 0
                         ? listing.imageUrls
                         : listing.imageUrl ? [listing.imageUrl] : [];
                     const currentIdx = carouselIndexes[listing.id] || 0;
                     return (
-                        <div key={listing.id} className="listing-card">
+                        <div key={listing.id} className="listingCard">
                             {images.length > 0 && (
-                                <div className="image-container" >
+                                <div className="imageContainer" >
                                     <img
                                         src={images[currentIdx]}
                                         alt={`Listing ${currentIdx + 1}`}
-                                        className="listing-image"
+                                        className="listingImage"
                                     />
                                     {images.length > 1 && (
-                                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 5 }}>
+                                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 5,}}>
                                             <button className="btnNextBefore" type="button" onClick={() => handlePrev(listing.id, images.length)} style={{ marginRight: 10 }}>
                                                 &lt;
                                             </button>
@@ -65,9 +71,9 @@ function MyListings() {
                                     )}
                                 </div>
                             )}
-                            <p className="listing-description"><b>Description:</b> {listing.descriptionAmenities}</p>
-                            <p className="listing-description"><b>Price:</b> €{listing.price}</p>
-                            <p className="listing-description"><b>Location:</b> {listing.address}</p>
+                            <p className="listing-description"> {listing.descriptionAmenities}</p>
+                            <p className="listing-description"><span style={{color: 'darkgreen', fontStyle: 'italic'}}>Price:</span> €{listing.price}</p>
+                            <p className="listing-description"><span style={{color: 'darkgreen', fontStyle: 'italic'}}>Location:</span> {listing.address}</p>
                             <Link to={`/dashboard/edit-listing/${listing.id}`} className="edit-listing-btn">Edit</Link>
                         </div>
                     );

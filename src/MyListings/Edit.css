@@ -1,17 +1,23 @@
-.btnNextBefore {
-    background-color: transparent;
+.btnNextBeforeEdit {
     border: none;
     cursor: pointer;
     font-size: 1.5rem;
     color: #333;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right:10px;
+    margin-left:10px;
+    background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
 }
 
-.btnNextBefore:hover {
+.btnNextBeforeEdit:hover {
     color: darkgreen;
+    transform: scale(1.5);
 }
 
 .btnEditSave {
-    background-color: rgb(44, 98, 51);
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
     color: whitesmoke;
     padding: 10px 20px;
     border: none;
@@ -21,23 +27,12 @@
     height: 50px;
     font-weight: bold;
     font-size: 1.1rem;
+    margin: 20px;
 }
 
 .btnEditSave:hover {
-    background-color: rgb(212, 237, 213);
-    color: darkgreen;
-}
-
-.btnRemoveImage {
-    background-color: rgb(44, 98, 51);
-    color: whitesmoke;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    font-weight: bold;
-    font-size: 1.1rem;
+    background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+    transform: scale(1.05);
 }
 
 .btnRemoveImage:hover {
@@ -49,14 +44,95 @@
     display: flex;
     flex-direction: row;
     height: 100vh;
+    font-style: oblique;
 }
 
 
-.listing-image-edit{
+
+.edit-image-previews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.edit-image-wrapper {
+  position: relative;
+  width: 30vw;      /* fixed width */
+  height: 90vh;     /* fixed height */
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.btnRemoveImage {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(171, 13, 13, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.edit-carousel-controls {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+
+.edit-form label {
+    font-weight: bold;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 85vh;
+    margin: 2%;
+    border: none;
+    background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
+    box-shadow: whitesmoke 2px 2px 3px;
+    color: black;
+}
+
+.edit-form label {
+    width: 80%;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    padding: 5px;
+}
+
+
+
+.edit-form textarea {
+    height: 100px;
     width: 100%;
-    height: 90vh;
-    object-fit: contain;
-    background: #f5f5f5;
+    margin:10px ;
 }
+
+.edit-form input,
+.edit-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 
 

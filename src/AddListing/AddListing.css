@@ -1,6 +1,7 @@
 .add-listing-page {
     display: flex;
     flex-direction: row;
+    height: 100vh;
 }
 
 .listing-form label {
@@ -8,10 +9,16 @@
 }
 
 .listing-form {
-    display: flex;
+   display: flex;
     flex-direction: column;
     width: 50%;
+    height: 85vh;
     margin: 2%;
+    border: none;
+    background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
+    box-shadow: whitesmoke 2px 2px 3px;
+    color: black;
+    
 }
 
 .listing-form label {
@@ -39,7 +46,7 @@
 }
 
 .btnAddListing {
-    background-color: rgb(44, 98, 51);
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
     color: whitesmoke;
     padding: 10px 20px;
     border: none;
@@ -49,39 +56,93 @@
     height: 50px;
     font-weight: bold;
     font-size: 1.1rem;
+    margin: 20px;
 }
 
 .btnAddListing:hover {
-    background-color: rgb(212, 237, 213);
+   background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+    transform: scale(1.05);
+}
+
+
+
+.right-panel {
+    width: 40vw;
+    margin-right:10%;
+    margin-left: 10%;
+}
+
+
+.map-container {
+    height: 40vh !important;
+    width: 100% !important;
+    margin: 20px 0;
+    border: 2px solid #007bff;
+    border-radius: 12px;
+    position: relative;
+    display: block !important;
+    visibility: visible !important;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.15);
+}
+.image-previews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 30vw;      /* fixed width */
+  height: 45vh;     /* fixed height */
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.btnRemoveImage {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(171, 13, 13, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.carousel-controls {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+
+.btnNextBefore {
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #333;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right:10px;
+    margin-left:10px;
+    background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
+}
+
+.btnNextBefore:hover {
     color: darkgreen;
-}
-
-
-.cardTips {
-    width: 100%;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    background-color: rgb(163, 207, 169);
-    color: black;
-    margin:2%;
-}
-
-.cardTips li{
-    list-style: none;
-    padding:0px;
-    margin:0px;
-}
-
-.cardTips ul{
-    padding: 0px;
-    margin: 0px;
-    padding-bottom: 20px;
-}
-
-.cards{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    margin: 2%;
+    transform: scale(1.5);
 }

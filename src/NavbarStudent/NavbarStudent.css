@@ -3,7 +3,7 @@
     margin: 0px;
     height: 100%;
     position: fixed;
-    background: rgb(44, 98, 51);
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
     display: flex;
     flex-direction: column;
     color: white;
@@ -18,9 +18,9 @@
 }
 
 .btnNav {
-    background-color: rgb(44, 98, 51);
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
     color: white;
-    padding: 15px 10px;
+    padding: 15px 30px;
     border: none;
     cursor: pointer;
     font-weight: bold;
@@ -32,11 +32,9 @@
 }
 
 .btnNavHeader{
-    background-color: rgb(44, 98, 51);
+    background: linear-gradient(90deg, rgb(60, 109, 66) 0%, #26c52c 100%);
     color: white;
     padding: 15px 10px;
-    margin: 20px;
-    border: none;
     cursor: pointer;
     font-weight: bold;
     font-size: 1.5em;
@@ -44,15 +42,21 @@
     align-items: center;
     font-family: inherit;
     text-decoration: none;
+    padding:30px;
 }
 
 .btnNav:hover {
-    background-color: rgb(212, 237, 213);
-    color: darkgreen;
+    background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+    font-style: oblique;
+    text-shadow: black 1px 2px 8px;
 }
 
 .btnNavHeader:hover {
-    text-decoration: underline;
+    font-style: oblique;
+    background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+    text-shadow: black 1px 2px 8px;
+
+
 }
 
 footer{

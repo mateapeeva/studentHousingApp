@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -9,9 +9,11 @@ import { onAuthStateChanged } from "firebase/auth";
 import './NavbarStudent.css';
 
 export default function NavbarStudent() {
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({ name: '' });
     const handleLogout = async () => {
         await signOut(auth);
+        navigate("/");
     };
 
     useEffect(() => {

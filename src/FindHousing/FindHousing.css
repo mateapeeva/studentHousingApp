@@ -6,53 +6,59 @@
 }
 
 .listing-card {
-    border: 1px solid #000000;
+    border-radius: 20px;
     padding: 16px;
-    width: 500px;
     display: flex;
     flex-direction: column;
     margin:20px;
     text-align: left;
+    width: 300px;
+    height: 500px;
+    font-size: 0.8rem;
+    background: whitesmoke;
+}
+
+.listing-card:hover{
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .image-container {
-    position: relative;
-    margin-bottom: 40px;
-    height: 400px;
+   position: relative;
+   height: 250px;
 }
 
 .listing-image {
     width: 100%;
-    height: 400px;
     object-fit: contain;
-    background: #f5f5f5;
     display: block;
+    height: 200px;
 }
 
-.edit-listing-btn {
-    margin-top: auto;
+.btnView {
+   margin-top: auto;
     align-self: flex-end;
-    background-color: rgb(44, 98, 51);
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
     color: whitesmoke;
-    padding: 10px 20px;
+    padding: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 70px;
-    height: 30px;
+    height: 20px;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     text-align: center;
     text-decoration: none;
 }
 
-.edit-listing-btn:hover {
-    background-color: rgb(212, 237, 213);
-    color: darkgreen;
+.btnView:hover {
+    background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+    transform: scale(1.1);
 }
 
 .btnNextBefore {
-    background-color: transparent;
+     background-color: transparent;
     border: none;
     cursor: pointer;
     font-size: 1.5rem;
@@ -61,5 +67,96 @@
 
 .btnNextBefore:hover {
     color: darkgreen;
+}
+
+.popUpFilters {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.filtersDIV{
+    background: #fff;
+    padding: 32px;
+    border-radius: 12px;
+    min-width: 900px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+}
+
+.filtersDIV label{
+    display: flex;
+    align-items: left;
+    gap: 8px;
+    margin: 8px 0;
+    white-space: nowrap;
+}
+
+.filtersDIV form{
+    background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
+    border: none;
+    box-shadow: whitesmoke 2px 2px 3px;
+}
+
+.popUpFilters form input,.popUpFilters form select{
+  width: 600px;
+  height: 50px;
+  margin-bottom: 18px;
+  font-size: 1.1rem;
+  padding: 8px 10px;
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: whitesmoke;
+  color: gray;
+}
+
+.btnFilter {
+    margin:10px;
+    align-self: flex-end;
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
+    color: whitesmoke;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 70px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btnFilter:hover {
+    background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+    transform: scale(1.1);
+}
+
+.filter{
+    margin:10px;
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
+    color: whitesmoke;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: fit-content;
+    height: 30px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+
+}
+
+.filter:hover {
+    background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+    transform: scale(1.1);
 }
 

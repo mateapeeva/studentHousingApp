@@ -1,0 +1,44 @@
+
+.btnRoommate {
+    background-color: rgb(44, 98, 51);
+    color: whitesmoke;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 170px;
+    height: 40px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    align-self: flex-end;
+}
+
+.roommates{
+    align-items: flex-start;
+}
+
+
+.roommates textarea{
+    height: 70px;
+    width: 100%;
+}
+
+.roommates input{
+    width: 45%;
+}
+
+.roommates{
+    text-align: left;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width:90%;
+    margin:auto;
+    border:none;
+    gap:10px;
+}
+
+.roommates label{
+    font-size: 1rem;
+}

@@ -1,54 +1,61 @@
-#listing-container {
+#listingContainer {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
 }
 
-.listing-card {
-    border: 1px solid #000000;
+
+.listingCard {
+    border-radius: 20px;
     padding: 16px;
-    width: 500px;
     display: flex;
     flex-direction: column;
     margin:20px;
     text-align: left;
+    width: 300px;
+    height: 500px;
+    font-size: 0.8rem;
+    background: whitesmoke;
 }
 
-.image-container {
+.listingCard:hover{
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.imageContainer {
     position: relative;
-    margin-bottom: 40px;
-    height: 400px;
+    height: 250px;
 }
 
-.listing-image {
+.listingImage {
     width: 100%;
-    height: 400px;
     object-fit: contain;
-    background: #f5f5f5;
     display: block;
+    height: 200px;
 }
 
 .edit-listing-btn {
     margin-top: auto;
     align-self: flex-end;
-    background-color: rgb(44, 98, 51);
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
     color: whitesmoke;
-    padding: 10px 20px;
+    padding: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 70px;
-    height: 30px;
+    height: 20px;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     text-align: center;
     text-decoration: none;
 }
 
 .edit-listing-btn:hover {
-    background-color: rgb(212, 237, 213);
-    color: darkgreen;
+    background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+    transform: scale(1.1);
 }
 
 .btnNextBefore {
@@ -62,4 +69,5 @@
 .btnNextBefore:hover {
     color: darkgreen;
 }
+
 

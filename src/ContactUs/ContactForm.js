@@ -4,6 +4,9 @@ import { db } from "../firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { useOutletContext } from "react-router-dom";
 import "./ContactForm.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import { faGithub, faInstagram, faTelegram } from '@fortawesome/free-brands-svg-icons';
 
 function ContactForm(props) {
   const { user } = useOutletContext() || {};
@@ -38,13 +41,23 @@ function ContactForm(props) {
 
   return (
     <div className="contact-form-container">
+      <div className="infoText">
+        <p>Thank you for reaching out! </p>
+        <p>You can leave your message here or contact us via</p>
+        <div className="iconContainer">
+          <FontAwesomeIcon icon={faEnvelope} className="icon" />
+          <FontAwesomeIcon icon={faGithub} className="icon" />
+          <FontAwesomeIcon icon={faInstagram} className="icon" />
+          <FontAwesomeIcon icon={faTelegram} className="icon" />
+        </div>
+      </div>
       <form className="contact-form" onSubmit={handleSubmit}>
         <label>
-          Message:
           <textarea
             name="message"
             value={form.message}
             onChange={handleChange}
+            placeholder="Write your message here..."
             required
           />
         </label>

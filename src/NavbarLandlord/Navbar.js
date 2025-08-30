@@ -33,7 +33,7 @@ export default function Navbar() {
     }, []);
 
     return (
-        <nav className="navbar">
+        <div className="navbar">
             <Link to="/dashboard" className="btnNavHeader">{userData.name}'s Dashboard</Link>
             <Link to="/dashboard/my-listings" className="btnNav">My Listings</Link>
             <Link to="/dashboard/add-listing" className="btnNav">Add Listing</Link>
@@ -43,7 +43,7 @@ export default function Navbar() {
             <footer>
                 <p>&copy; 2025 Student Housing App</p>
             </footer>
-        </nav>
+        </div>
     );
 }
 
