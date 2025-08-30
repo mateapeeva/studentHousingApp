@@ -121,7 +121,7 @@ const FindRoommate = () => {
                         )}
                         <p className='infoRoommate'><span><FontAwesomeIcon icon={faPhone} className="iconRoommate" /></span> {student.phone}</p>
                         <p className='infoRoommate'><span><FontAwesomeIcon icon={faInstagram} className="iconRoommate" /></span> {student.instagram}</p>
-                        <p className='infoRoommate'><span><FontAwesomeIcon icon={faGraduationCap} className="iconRoommate" /></span> {student.municipality}</p>
+                        <p className='infoRoommate'><span><FontAwesomeIcon icon={faGraduationCap} className="iconRoommate" /></span> {student.faculty}</p>
                         {student.appliedApartments && student.appliedApartments.length > 0 && (
                             <p style={{ fontSize: '0.95em', color: '#555' }}><b>Applied Apartments:</b> {student.appliedApartments.join(', ')}</p>
                         )}

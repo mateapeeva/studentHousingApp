@@ -7,6 +7,8 @@
     display: flex;
     flex-direction: column;
     color: white;
+    width: 250px;
+
 }
 
 .navbar h2 {
