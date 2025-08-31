@@ -70,8 +70,8 @@ export default function Login() {
 
     return(
         
-        <div>
-            <form onSubmit={handleLogin}>
+        <div className='containerLogin'>
+            <form onSubmit={handleLogin} className='formLogin'>
                 <h1>Login</h1>
                 <input
                     type="email"
@@ -87,7 +87,7 @@ export default function Login() {
                     onChange = {(e) => setPassword(e.target.value)}
                     required
                 />
-                <button className='btn' type="submit">Login</button>
+                <button className='btnLogin' type="submit">Login</button>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
             </form>
         </div>

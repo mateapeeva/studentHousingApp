@@ -7,7 +7,7 @@
 }
 
 #landing h1{
-  color: rgb(59, 110, 39);
+  color: darkgreen
 }
 
 .container{
@@ -16,6 +16,7 @@
   justify-content: center;
   text-align: center;
   flex-direction: column;
+  height: 94vh;
 }
 
 #cards{
@@ -31,10 +32,17 @@
   width: 350px;
   height: 150px;
   border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  background-color: rgb(44, 98, 51);
+  box-shadow: rgba(21, 24, 22, 0.24) 0px 3px 8px;
+  background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
   color: white;
   padding: 10px;
+  margin:5px
+}
+
+
+.card:hover{
+  transform: scale(1.05);
+  cursor:default;
 }
 
 #buttons{
@@ -45,21 +53,30 @@
   align-items: center;
 }
 
-.btn{
-  background-color:rgb(44, 98, 51);
-  color: whitesmoke;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100px;
-  height: 50px;
-  font-weight: bold;
-  font-size: 1.1rem;
+.btnLandingPage{
+   background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
+    color: whitesmoke;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 20px;
 }
 
-.btn:hover{
-  background-color: rgb(212, 237, 213);
-  color: darkgreen;
+.btnLandingPage:hover{
+  background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+  transform: scale(1.05);
 }
 
+.footerLandingPage {
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  margin: 0px;
+  color:darkgreen;
+  font-weight: 600;
+}

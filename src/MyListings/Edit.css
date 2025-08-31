@@ -107,6 +107,10 @@
     background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
     box-shadow: whitesmoke 2px 2px 3px;
     color: black;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .edit-form label {

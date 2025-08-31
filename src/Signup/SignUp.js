@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
 import { doc, QueryEndAtConstraint, setDoc } from "firebase/firestore";
@@ -18,12 +18,12 @@ export default function SignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(!name || !surname || !email || !password || !confirmPassword || !role) {
+        if (!name || !surname || !email || !password || !confirmPassword || !role) {
             setError("All fields are required.");
             return;
         }
 
-        if(password !== confirmPassword) {
+        if (password !== confirmPassword) {
             setError("Passwords do not match.");
             return;
         }
@@ -35,45 +35,48 @@ export default function SignUp() {
                 "pendingUserData",
                 JSON.stringify({ name, surname, email, role })
             );
-        
+
 
             setError("");
             alert("Verification email sent! Please verify your email before logging in.");
             await signOut(auth);
 
             navigate("/login");
-        } 
+        }
         catch (error) {
             if (error.code === "auth/email-already-in-use") {
                 setError("This email is already registered. Please use another email or log in.");
             } else {
                 setError(error.message);
-        }
+            }
         }
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="containerSignUp">
+            <form onSubmit={handleSubmit} className="formSignUp">
                 <h1>Sign Up</h1>
                 <div className="role-selection">
-                    <label className = {role === "Student" ? "selected" : ""}>
+                    <label className={role === "Student" ? "selected" : ""}>
                         <input
                             type="radio"
                             placeholder="Student"
-                            value= "Student"
+                            value="Student"
                             checked={role === "Student"}
                             onChange={(e) => setRole(e.target.value)}
+                            className="inputRole"
                         />
                         Student
                     </label>
-                    <label className = {role === "Landlord" ? "selected" : ""}>
+                    <label className={role === "Landlord" ? "selected" : ""}>
                         <input
                             type="radio"
                             placeholder="Landlord"
-                            value= "Landlord"
+                            value="Landlord"
                             checked={role === "Landlord"}
                             onChange={(e) => setRole(e.target.value)}
+                            className="inputRole"
+
                         />
                         Landlord
                     </label>
@@ -83,32 +86,37 @@ export default function SignUp() {
                     placeholder="First Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    className="inputData"
                 />
                 <input
                     type="text"
                     placeholder="Surname"
                     value={surname}
                     onChange={(e) => setSurname(e.target.value)}
+                    className="inputData"
                 />
                 <input
                     type="email"
                     placeholder="Your email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="inputData"
                 />
                 <input
                     type="password"
                     placeholder="Your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="inputData"
                 />
                 <input
                     type="password"
                     placeholder="Your password again"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="inputData"
                 />
-                <button className="btn" type="submit">Sign Up</button>
+                <button className="btnSignUp" type="submit">Sign Up</button>
             </form>
             {error && <p>{error}</p>}
         </div>

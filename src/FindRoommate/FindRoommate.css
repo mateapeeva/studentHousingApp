@@ -26,14 +26,6 @@
 }
 
 
-.roommates textarea{
-    height: 70px;
-    width: 100%;
-}
-
-.roommates input{
-    width: 45%;
-}
 
 .roommates{
     text-align: left;
@@ -64,7 +56,10 @@
 
 .studentCard:hover{
     transform: scale(1.02);
-    background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
+    color: white;
+    transition: all 0.2s ease-in-out;
+
 }
 
 .infoRoommate {
@@ -74,10 +69,44 @@
     align-self: center;
 }
 
-.infoRoommate{
-    margin-right: 8px;
+.infoRoommate:hover{
+    cursor: default;
 }
 
 .iconRoommate {
     margin-right: 5px;
+}
+
+.infoRoommateInput {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    width: 45%;
+    box-sizing: border-box;
+    margin: 10px;
+}
+.infoRoommate a {
+    color: black; 
+    text-decoration: none; 
+    font-weight: normal; 
+    transition: all 0.2s ease-in-out;
+}
+
+.infoRoommate a:visited {
+    color: black;
+}
+
+.infoRoommate a:hover{
+    font-weight: bolder;
+    color: white;
+    transform: scale(1.05);
+}
+
+.studentCard:hover .infoRoommate a {
+    color: white;
+}
+
+.studentCard:hover .studentName {
+    font-size: 1.3rem;
+    text-decoration: underline;
 }

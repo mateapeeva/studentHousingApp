@@ -6,7 +6,8 @@ import './FindRoommate.css';
 import { auth } from "../firebase";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-import {faPhone, faGraduationCap} from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 
 const FindRoommate = () => {
@@ -115,16 +116,13 @@ const FindRoommate = () => {
                         key={student.id}
                         className='studentCard'
                     >
-                        <h3 style={{ textAlign: 'center' }}>{student.name} {student.surname}</h3>
+                        <h3 className='studentName' style={{ textAlign: 'center' }}>{student.name} {student.surname}</h3>
                         {student.profile && (
                             <img src={student.profile} alt="Profile" style={{ width: '100%', borderRadius: '8px', marginBottom: 8 }} />
                         )}
                         <p className='infoRoommate'><span><FontAwesomeIcon icon={faPhone} className="iconRoommate" /></span> {student.phone}</p>
-                        <p className='infoRoommate'><span><FontAwesomeIcon icon={faInstagram} className="iconRoommate" /></span> {student.instagram}</p>
+                        <p className='infoRoommate'><Link className='insta' to={`https://www.instagram.com/${student.instagram}`} target="_blank" rel="noopener noreferrer"><span><FontAwesomeIcon icon={faInstagram} className="iconRoommate" /></span>{student.instagram}</Link></p>
                         <p className='infoRoommate'><span><FontAwesomeIcon icon={faGraduationCap} className="iconRoommate" /></span> {student.faculty}</p>
-                        {student.appliedApartments && student.appliedApartments.length > 0 && (
-                            <p style={{ fontSize: '0.95em', color: '#555' }}><b>Applied Apartments:</b> {student.appliedApartments.join(', ')}</p>
-                        )}
                     </div>
                 ))}
             </div>
@@ -144,16 +142,17 @@ const FindRoommate = () => {
                     <div style={{ background: '#fff', padding: 32, borderRadius: 12, minWidth: 200, textAlign: 'center', boxShadow: '0 2px 16px rgba(0,0,0,0.2)' }}>
                         <form className="roommates" onSubmit={handleRoommateSubmit}>
                             <label>
-                                <span><FontAwesomeIcon icon={faPhone} className="iconRoommate" />Phone Number</span>
+                                <span ><FontAwesomeIcon icon={faPhone} className="iconRoommate" />Phone Number</span>
                                 <input
                                     type="text"
                                     name="phoneNumber"
                                     value={roommateForm.phone}
                                     onChange={e => setRoommateForm({ ...roommateForm, phone: e.target.value })}
                                     required
+                                    className='infoRoommateInput'
                                 />
                             </label>
-                            <label>
+                            <label >
                                 <span><FontAwesomeIcon icon={faInstagram} className="iconRoommate" />Instagram</span>
                                 <input
                                     type="text"
@@ -161,16 +160,20 @@ const FindRoommate = () => {
                                     value={roommateForm.instagram}
                                     onChange={e => setRoommateForm({ ...roommateForm, instagram: e.target.value })}
                                     required
+                                    className='infoRoommateInput'
+
                                 />
                             </label>
                             <label>
-                                <span><FontAwesomeIcon icon={faGraduationCap} className="iconRoommate" />Faculty</span>
+                                <span className='spanInfo'><FontAwesomeIcon icon={faGraduationCap} className="iconRoommate" />Faculty</span>
                                 <input
                                     type="text"
                                     name="roommateFaculty"
                                     value={roommateForm.faculty}
                                     onChange={e => setRoommateForm({ ...roommateForm, faculty: e.target.value })}
                                     required
+                                    className='infoRoommateInput'
+
                                 />
                             </label>
                             <button className="btnRoommate" style={{ marginTop: '12px', marginBottom: '-10px' }}>Save your info</button>

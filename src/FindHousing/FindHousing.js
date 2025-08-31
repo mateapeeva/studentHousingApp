@@ -27,7 +27,7 @@ function FindHousing() {
         { label: "Faculty of Economics", value: { name: "Faculty of Economics", address: "Faculty of Economics, Skopje, North Macedonia", lat: 42.000987356632294, lng: 21.4431244478323 } },
         { label: "Faculty of Architecture", value: { name: "Faculty of Architecture", address: "Faculty of Architecture, Skopje, North Macedonia", lat: 41.99987663972871, lng: 21.419160546863143 } },
         { label: "Faculty of Medicine", value: { name: "Faculty of Medicine", address: "Faculty of Medicine, Skopje, North Macedonia", lat: 41.989776850704686, lng: 21.424374639398117 } },
-        { label: "Faculty of Natural Sciences & Mathematics", value: { name: "Faculty of Natural Sciences & Mathematics", address: "Faculty of Natural Sciences & Mathematics, Skopje, North Macedonia", lat: 42.003288321756784, lng:21.449866882535055 } },
+        { label: "Faculty of Natural Sciences & Mathematics", value: { name: "Faculty of Natural Sciences & Mathematics", address: "Faculty of Natural Sciences & Mathematics, Skopje, North Macedonia", lat: 42.003288321756784, lng: 21.449866882535055 } },
         // Add more locations as needed
     ];
 
@@ -67,47 +67,41 @@ function FindHousing() {
         // Apartment size
         if (filters.apartmentSizeMin && Number(listing.apartmentSize) < Number(filters.apartmentSizeMin)) return false;
         if (filters.apartmentSizeMax && Number(listing.apartmentSize) > Number(filters.apartmentSizeMax)) return false;
-        
+
         // Location and radius filtering
         if (filters.locations.length > 0 && filters.radius) {
             const selectedLocation = filters.locations[0];
             if (!listing.coordinates || !listing.coordinates.lat || !listing.coordinates.lng) {
                 return false; // Skip listings without coordinates
             }
-            
+
             const distance = calculateDistance(
                 selectedLocation.lat,
                 selectedLocation.lng,
                 listing.coordinates.lat,
                 listing.coordinates.lng
             );
-            
+
             if (distance > Number(filters.radius)) return false;
         }
-        
+
         return true;
     });
 
     return (
         <div>
             <button onClick={() => setShowFilters(true)} className="filter">Filter appartments here</button>
-            {(filters.locations.length > 0 && filters.radius) && (
-                <div style={{ padding: '10px', backgroundColor: '#e8f5e8', margin: '10px 0', borderRadius: '5px' }}>
-                    <small>
-                        Showing listings within {filters.radius}km of {filters.locations[0]?.name}
-                    </small>
-                </div>
-            )}
             {showFilters && (
                 <div className="popUpFilters">
                     <div className="filtersDIV">
-                        <form>
+                        <form className="filtersForm">
                             {/* Number of rooms */}
                             <input
                                 type="number"
                                 value={filters.numberOfRooms}
                                 onChange={e => setFilters({ ...filters, numberOfRooms: e.target.value })}
                                 placeholder="Number of rooms"
+                                className="filterInput"
                             />
                             {/* Price min/max */}
                             <input
@@ -115,6 +109,8 @@ function FindHousing() {
                                 value={filters.priceMax}
                                 onChange={e => setFilters({ ...filters, priceMax: e.target.value })}
                                 placeholder="Max price"
+                                className="filterInput"
+
                             />
                             {/* Apartment size min/max */}
                             <input
@@ -122,9 +118,12 @@ function FindHousing() {
                                 value={filters.apartmentSizeMin}
                                 onChange={e => setFilters({ ...filters, apartmentSizeMin: e.target.value })}
                                 placeholder="Min size"
+                                className="filterInput"
+
                             />
                             <label>
                                 <select
+                                    className="filterInput"
                                     value={filters.locations[0]?.name || ""}
                                     onChange={e => {
                                         const selected = locationOptions.find(loc => loc.value.name === e.target.value);
@@ -143,6 +142,8 @@ function FindHousing() {
                                 value={filters.radius}
                                 onChange={e => setFilters({ ...filters, radius: e.target.value })}
                                 placeholder="Radius (km)"
+                                className="filterInput"
+
                             />
                             <button className="btnFilter" type="button" onClick={() => { setShowFilters(false); }}>Filter</button>
                         </form>
@@ -178,9 +179,9 @@ function FindHousing() {
                                 </div>
                             )}
                             <p className="listing-description">{listing.descriptionAmenities}</p>
-                            <p className="listing-description"><span style={{color: 'darkgreen', fontStyle: 'italic'}}>Price:</span> €{listing.price}</p>
-                            <p className="listing-description"><span style={{color: 'darkgreen', fontStyle: 'italic'}}>Location:</span> {listing.address}</p>
-                            <Link className="btnView" to={`/student-dashboard/view-listing/${listing.id}`}>View</Link>
+                            <p className="listing-description"><span style={{ color: 'darkgreen', fontStyle: 'italic' }}>Price:</span> €{listing.price}</p>
+                            <p className="listing-description"><span style={{ color: 'darkgreen', fontStyle: 'italic' }}>Location:</span> {listing.address}</p>
+                            <Link className="btnView" target="_blank" to={`/student-dashboard/view-listing/${listing.id}`}>View</Link>
                         </div>
                     );
                 })}

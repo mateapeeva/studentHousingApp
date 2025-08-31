@@ -32,7 +32,7 @@ function Landing() {
     <div className="container">
       <div id="landing">
         <h1>Welcome to the Student Housing App</h1>
-        <p>Your one-stop solution for finding student housing!</p>
+        <p style={{color: 'darkgreen', fontSize: '1.2rem'}}><b>Your one-stop solution for finding student housing!</b></p>
       </div>
       <div id="cards">
         <div className="card">
@@ -49,10 +49,10 @@ function Landing() {
         </div>
       </div>
       <div id="buttons">
-        <button className="btn" onClick={() => navigate('/signup')} >Sign Up</button>
-        <button className="btn" onClick={() => navigate('/login')} >Log In</button>
+        <button className="btnLandingPage" onClick={() => navigate('/signup')} >Sign Up</button>
+        <button className="btnLandingPage" onClick={() => navigate('/login')} >Log In</button>
       </div>
-      <footer>
+      <footer className='footerLandingPage'>
         <p>&copy; 2025 Student Housing App</p>
       </footer>
     </div>

@@ -85,28 +85,38 @@
     background: #fff;
     padding: 32px;
     border-radius: 12px;
-    min-width: 900px;
+    width: 40vw;
+    height: 60vh;
     box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    align-items: center;
+    justify-content: center;
 }
 
-.filtersDIV label{
+
+.filtersForm{
     display: flex;
-    align-items: left;
-    gap: 8px;
-    margin: 8px 0;
-    white-space: nowrap;
-}
-
-.filtersDIV form{
+    flex-direction: column;
     background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
     border: none;
     box-shadow: whitesmoke 2px 2px 3px;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    gap:10px;
+    margin: 10px 0;
+    border-radius: 20px;
 }
 
-.popUpFilters form input,.popUpFilters form select{
-  width: 600px;
+.filterInput{
+    display: flex;
+    align-items: left;
+    white-space: nowrap;
+}
+
+
+.filterInput{
+  width: 30vw;
   height: 50px;
-  margin-bottom: 18px;
   font-size: 1.1rem;
   padding: 8px 10px;
   border-radius: 7px;

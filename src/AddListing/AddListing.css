@@ -18,7 +18,10 @@
     background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
     box-shadow: whitesmoke 2px 2px 3px;
     color: black;
-    
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border-radius: 10px;
 }
 
 .listing-form label {

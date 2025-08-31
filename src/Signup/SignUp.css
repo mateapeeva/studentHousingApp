@@ -1,108 +1,108 @@
- body{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-  background-color: white
-;
-}
+ body {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+   background-color: white;
+ }
 
-h1{
-  color: rgb(59, 110, 39);
-}
+ h1 {
+   color: rgb(59, 110, 39);
+ }
 
 
-.container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex-direction: column;
-  border-radius: 40px;
-  margin: 20px;
-}
+ .containerSignUp {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   flex-direction: column;
+   border-radius: 40px;
+   height: 100vh;
+   width: 100vw;
+ }
 
-#cards{
-  margin: 20px;
-  width: 80%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.card{
-  width: 350px;
-  height: 150px;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  background-color: rgb(44, 98, 51);
-  color: white;
-  padding: 10px;
-}
-
-#buttons{
-  margin: 20px;
-  width: 300px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+ #buttons {
+   margin: 20px;
+   width: 300px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
 
 
 
-form{
-    border: 1px solid #ccc;
-    display: flex;
-    justify-content: center;
-    margin: 50px;
-    padding: 20px;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 50px;
-}
+ .formSignUp {
+   display: flex;
+   justify-content: center;
+   padding: 20px;
+   flex-direction: column;
+   align-items: center;
+   border-radius: 50px;
+   width: 60vw;
+   height: 70vh;
+   background: linear-gradient(90deg, #f1f6f2 0%, #d5eed5 100%);
+   box-shadow: whitesmoke 2px 2px 3px;
+   border: none;
+ }
 
-input{
-  width: 30%;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
+ .inputData {
+   width: 50%;
+   padding: 10px;
+   margin: 10px;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+ }
 
-.btn{
-  background-color:rgb(44, 98, 51);
-  color: whitesmoke;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100px;
-  height: 50px;
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin:10px
-}
+ .btnSignUp {
+   background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
+   color: whitesmoke;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   width: 150px;
+   height: 50px;
+   font-weight: bold;
+   font-size: 1.1rem;
+   margin: 20px;
+ }
 
-.btn:hover{
-  background-color: rgb(212, 237, 213);
-  color: darkgreen;
-}
+ .btnSignUp:hover {
+   background: linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+   transform: scale(1.05);
+ }
 
-.role-selection{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+ .role-selection {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap:30px
+ }
 
-.role-selection label{
-  width: 200px;
-}
+ .role-selection label {
+   border: 1px solid darkgreen;
+   border-radius: 5px;
+   cursor: pointer;
+   user-select: none;
+   width: 120px;
+   padding: 5px 10px;
+   font-weight: 800;
+   color: darkgreen;
+   box-shadow: darkgreen 2px 2px 3px;
+   transition: background 0.2s, color 0.3s;
+   margin:10px;
+ }
 
-.role-selection label.selected{
-  background-color: rgb(44, 98, 51);
-  color: white;
-  border-radius: 5px;
-}
+ .role-selection label:hover{
+   background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
+   color: white;
+ }
 
 
+
+ .role-selection label.selected {
+   background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
+   color: white;
+   border-radius: 5px;
+ }
