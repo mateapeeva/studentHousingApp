@@ -77,3 +77,58 @@
     box-shadow: 0 4px 20px rgba(0, 123, 255, 0.15);
 }
 
+.booking-form {
+    background: linear-gradient(90deg, #f1f6f2 0%, #f3fef6 100%);
+    padding: 32px;
+    border-radius: 12px;
+    width: 30vw;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+}
+
+.slot-select {
+    width: 400px;
+    margin-top: 8px;
+    height: 40px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    padding-left: 15px;
+    color: gray;
+}
+
+.slot-number{
+    width: 380px;
+    margin-top: 8px;
+    height: 40px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    padding-left: 15px;
+    color: gray;
+}
+
+.btnBook{
+    background: linear-gradient(90deg, #2c6233 0%, #3f9842 100%);
+    color: whitesmoke;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    align-self: flex-end;
+    margin-top: 20px;
+}
+
+.btnBook:hover {
+    background:linear-gradient(90deg, #2c6233 0%, #045a04 100%);
+    transform: scale(1.05);
+}
+
+.booking-form-title {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: darkgreen
+}

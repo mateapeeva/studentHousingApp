@@ -110,3 +110,8 @@
     font-size: 1.3rem;
     text-decoration: underline;
 }
+
+.studentCards{
+    display: flex;
+    flex-wrap: wrap;
+}

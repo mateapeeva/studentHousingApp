@@ -18,6 +18,8 @@ import DashboardLayoutStudent from './DashboardLayoutStudent/DashboardLayoutStud
 import FindHousing from './FindHousing/FindHousing.js';
 import View from './FindHousing/View.js';
 import FindRoommate from './FindRoommate/FindRoommate.js';
+import ViewApplicants from './ViewAplicants/ViewApplicants.js';
+import MyApplications from './MyApplications/MyApplications.js';
 
 
 function Landing() {
@@ -74,6 +76,7 @@ function App() {
           <Route path="/student-dashboard/view-listing/:id" element={<View />} />
           <Route path="/student-dashboard/find-roommates" element={<FindRoommate />} />
           <Route path="/student-dashboard/contact" element={<ContactForm />} />
+          <Route path="/student-dashboard/my-applications" element={<MyApplications />} />
         </Route>
 
         <Route path="/dashboard" element={<DashboardLayout />}>
@@ -82,6 +85,7 @@ function App() {
           <Route path="/dashboard/add-listing" element={<AddListing />} />
           <Route path="/dashboard/contact" element={<ContactForm />} />
           <Route path="/dashboard/edit-listing/:id" element={<Edit />} />
+          <Route path="/dashboard/view-applicants" element={<ViewApplicants />} />
         </Route>
       </Routes>
     </Router>

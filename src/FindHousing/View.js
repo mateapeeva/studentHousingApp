@@ -1,10 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { doc, getDoc, collection, query, where, getDocs, updateDoc } from "firebase/firestore";
+import { db, auth } from "../firebase";
 import './View.css';
-import { collection, addDoc } from "firebase/firestore";
-import { auth } from "../firebase";
+import { addDoc } from "firebase/firestore";
 import Map, { Marker } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useCallback } from 'react';
@@ -14,13 +13,19 @@ const MAPTILER_KEY = "kWS7KZmpJRLeVMdBOMaI";
 
 
 function View() {
-
+    const user = auth.currentUser;
     const { id } = useParams();
     const [listing, setListing] = useState(null);
     const [currentImgIdx, setCurrentImgIdx] = useState(0);
     const [landlord, setLandlord] = useState(null);
-
-
+    const [coords, setCoords] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
+    const [availableSlots, setAvailableSlots] = useState([]);
+    const [selectedSlot, setSelectedSlot] = useState("");
+    const [phone, setPhone] = useState("");
+    const [booking, setBooking] = useState(false);
+    const [hasApplied, setHasApplied] = useState(false);
+    const [userFirstName, setUserFirstName] = useState("");
 
     useEffect(() => {
         const fetchListing = async () => {
@@ -35,7 +40,59 @@ function View() {
         fetchListing();
     }, [id]);
 
-    const [coords, setCoords] = useState(null);
+    // Check if user has already applied for this listing
+    useEffect(() => {
+        const checkApplied = async () => {
+            if (!user || !listing) return;
+            const q = query(
+                collection(db, "appointments"),
+                where("listingId", "==", id),
+                where("applicantName", "==", userFirstName)
+            );
+            const querySnapshot = await getDocs(q);
+            setHasApplied(!querySnapshot.empty);
+        };
+        checkApplied();
+    }, [user, listing, userFirstName, id, booking]);
+
+    // Fetch available slots for this landlord
+    useEffect(() => {
+        const fetchSlots = async () => {
+            if (!listing || !listing.landlordId) return;
+            const q = query(
+                collection(db, "appointments"),
+                where("landlordId", "==", listing.landlordId),
+                where("available", "==", true)
+            );
+            const querySnapshot = await getDocs(q);
+            setAvailableSlots(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        };
+        if (showPopup) fetchSlots();
+    }, [listing, showPopup]);
+
+    // Get user first name from Firestore (if available), fallback to displayName/email
+    useEffect(() => {
+        const fetchUserName = async () => {
+            if (user && user.uid) {
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    const data = userSnap.data();
+                    if (data.name) {
+                        setUserFirstName(data.name);
+                        return;
+                    }
+                }
+                // fallback to displayName or email
+                if (user.displayName) {
+                    setUserFirstName(user.displayName.split(" ")[0]);
+                } else if (user.email) {
+                    setUserFirstName("");
+                }
+            }
+        };
+        fetchUserName();
+    }, [user]);
 
     useEffect(() => {
         if (listing && listing.coordinates) {
@@ -55,7 +112,6 @@ function View() {
         };
         fetchLandlord();
     }, [listing]);
-
 
     if (!listing) return <div>Loading or not found...</div>;
 
@@ -134,7 +190,54 @@ function View() {
 
 
 
-                <button className="btnApply">Apply</button>
+                <button
+                    className="btnApply"
+                    onClick={() => { if (!hasApplied) setShowPopup(true); }}
+                    disabled={hasApplied}
+                    style={hasApplied ? { background: '#aaa', cursor: 'not-allowed' } : {}}
+                >
+                    {hasApplied ? "Applied" : "Apply"}
+                </button>
+                {showPopup && (
+                    <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+                        <form onSubmit={async (e) => {
+                            e.preventDefault();
+                            if (!selectedSlot) return alert("Please select a slot");
+                            setBooking(true);
+                            try {
+                                const slotRef = doc(db, "appointments", selectedSlot);
+                                await updateDoc(slotRef, {
+                                    available: false,
+                                    applicantName: userFirstName,
+                                    applicantPhone: phone,
+                                    listingId: id,
+                                    studentId: user ? user.uid : null
+                                });
+                                setShowPopup(false);
+                                alert("Appointment booked!");
+                            } catch (err) {
+                                alert("Error booking: " + err.message);
+                            } finally {
+                                setBooking(false);
+                            }
+                        }} className="booking-form">
+                            <h3 className="booking-form-title">Book Appointment</h3>
+                            <label>
+                                <select className="slot-select" value={selectedSlot} onChange={e => setSelectedSlot(e.target.value)} required>
+                                    <option value="">Select a slot</option>
+                                    {availableSlots.map(slot => (
+                                        <option key={slot.id} value={slot.id}>{slot.date} at {slot.time}</option>
+                                    ))}
+                                </select>
+                            </label><br /><br />
+                            <label>
+                                <input className="slot-number" type="tel" value={phone} onChange={e => setPhone(e.target.value)} required placeholder="Enter your phone number" />
+                            </label><br /><br />
+                            <button className="btnBook" type="submit" disabled={booking}>{booking ? "Booking..." : "Book"}</button>
+                            <button className="btnBook" type="button" onClick={() => setShowPopup(false)} style={{ marginLeft: 8 }}>Cancel</button>
+                        </form>
+                    </div>
+                )}
             </div>
         </div>
     );

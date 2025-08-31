@@ -37,7 +37,7 @@ export default function Navbar() {
             <Link to="/dashboard" className="btnNavHeader">{userData.name}'s Dashboard</Link>
             <Link to="/dashboard/my-listings" className="btnNav">My Listings</Link>
             <Link to="/dashboard/add-listing" className="btnNav">Add Listing</Link>
-            <Link to="/dashboard/applicants" className="btnNav">View Applicants</Link>
+            <Link to="/dashboard/view-applicants" className="btnNav">View Applicants</Link>
             <Link to="/dashboard/contact" className="btnNav">Contact Us</Link>
             <button className="btnNav" onClick={handleLogout}>Log Out</button>
             <footer>

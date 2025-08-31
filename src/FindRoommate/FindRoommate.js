@@ -110,7 +110,7 @@ const FindRoommate = () => {
             >
                 Edit Profile
             </button>
-            <div>
+            <div className='studentCards'>
                 {students.map(student => (
                     <div
                         key={student.id}

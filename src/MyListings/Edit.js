@@ -3,6 +3,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import React, { useEffect, useState } from "react";
 import "./Edit.css";
+import axios from "axios";
 
 function Edit() {
     // Helper for file input label
@@ -50,7 +51,7 @@ function Edit() {
                     const data = new FormData();
                     data.append("file", file);
                     data.append("upload_preset", UPLOAD_PRESET);
-                    const res = await window.axios.post(
+                    const res = await axios.post(
                         `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
                         data
                     );
